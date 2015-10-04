@@ -12,7 +12,7 @@ public class DatabaseUtil extends SQLiteOpenHelper {
 
 
     final String tag="db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "appStorage.db";
 
 
@@ -43,7 +43,7 @@ public class DatabaseUtil extends SQLiteOpenHelper {
     {
         Log.d(tag,"DatabaseUtil: Inside onCreate() ");
         database.execSQL(create_order_table);
-        Log.d(tag,"DatabaseUtil: Creating the Table Acronym \n SQL:" + create_order_table);
+        Log.d(tag,"DatabaseUtil: Creating the Table Ordering \n SQL:" + create_order_table);
 
 
     }
@@ -56,7 +56,6 @@ public class DatabaseUtil extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + ordering_table);
         Log.d(tag,"DatabaseUtil: Finished to destroy data ");
-
 
         onCreate(db);
         Log.d(tag,"DatabaseUtil: Finished to calling onCreate");

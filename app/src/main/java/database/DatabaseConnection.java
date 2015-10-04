@@ -50,13 +50,13 @@ public class DatabaseConnection {
     //--------------------  Return full Acronym List in alphabetical order ------------------
     public ArrayList<Food> getAllFood()
     {
-        Log.d(tag, "Inside getAllAcronym()" );
+        Log.d(tag, "Inside getAllFood()" );
 
         ArrayList<Food> foodList = new ArrayList<Food>();
 
-        Log.d(tag, "getAllAcronym: Going to run query on database " );
+        Log.d(tag, "getAllFood: Going to run query on database " );
         Cursor cursor1 = database.query(DatabaseUtil.ordering_table,  Order_Col,  null, null, null, null, null);
-        Log.d(tag, "getAllAcronym: Number of acronyms returned: " + cursor1.getCount());
+        Log.d(tag, "getAllFood: Number of food returned: " + cursor1.getCount());
 
         cursor1.moveToFirst();
         while (!cursor1.isAfterLast()) {
@@ -74,7 +74,7 @@ public class DatabaseConnection {
         });
         */
 
-        Log.d(tag, "Number of food found: "+ foodList.size() );
+        Log.d(tag, "Number of food found: " + foodList.size());
         return foodList;
     }
 
@@ -87,8 +87,19 @@ public class DatabaseConnection {
         ContentValues values = new ContentValues();
         values.put(DatabaseUtil.name, name.trim());
         values.put(DatabaseUtil.category, category.trim());
-        database.query(DatabaseUtil.ordering_table, Order_Col, null, null, null, null, null);
+        Cursor cursor = database.query(DatabaseUtil.ordering_table, Order_Col, DatabaseUtil.name + "='" +name.trim()+"'" , null, null, null, null);
         database.insert(DatabaseUtil.ordering_table, null, values);
+
+        if(cursor.getCount() <= 0)
+        {
+            database.insert(DatabaseUtil.ordering_table, null, values);
+            Log.d(tag, "Finished updating food to database" );
+        }
+        else
+        {
+            Log.d(tag, "food already exists" );
+        }
+
 
 
     }

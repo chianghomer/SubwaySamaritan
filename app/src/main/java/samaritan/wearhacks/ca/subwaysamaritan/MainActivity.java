@@ -34,22 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-         dataConnection = new DatabaseConnection(this);
-        try{
-            dataConnection.open();
-        }
-        catch (Exception e)
-        { }
-
-
-        addFoodArray(breadArray,categoryArray[0]);
-        addFoodArray(cheeseArray,categoryArray[1]);
-        addFoodArray(vegetableArray,categoryArray[2]);
-        addFoodArray(sauceArray, categoryArray[3]);
-        addFoodArray(toastedArray,categoryArray[4]);
-        addFoodArray(kindArray,categoryArray[5]);
-
-
+        addFoodToDatabase();
 
         TextView tv = (TextView)findViewById(R.id.mainActivity_txt);
         tv.setTypeface(FontManager.getTypeface(this));
@@ -61,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),OrderActivity.class));
+                startActivity(new Intent(getApplicationContext(), OrderActivity.class));
 
             }
         });
@@ -104,26 +89,27 @@ public class MainActivity extends AppCompatActivity {
         return str;
     }
 
+    private void addFoodToDatabase() {
+        dataConnection = new DatabaseConnection(this);
+        try{
+            dataConnection.open();
+        }
+        catch (Exception e)
+        { }
+        addFoodArray(breadArray,categoryArray[0]);
+        addFoodArray(cheeseArray,categoryArray[1]);
+        addFoodArray(vegetableArray,categoryArray[2]);
+        addFoodArray(sauceArray, categoryArray[3]);
+        addFoodArray(toastedArray,categoryArray[4]);
+        addFoodArray(kindArray,categoryArray[5]);
+    }
+
     private void addFoodArray(String [] foodArray, String category){
         for(int i = 0;i<foodArray.length;i++){
             dataConnection.addFood(foodArray[i],category);
         }
 
-
     }
 
-    private void displayFood(){
-
-
-        ArrayList<Food> temp = dataConnection.getAllFood();
-        String[] tempStr = new String[temp.size()];
-        for(int i = 0;i<temp.size();i++){
-            tempStr[i] = temp.get(i).getName();
-        }
-
-
-
-        Log.d(TAG, convertArrayToString(tempStr));
-    }
 
 }
