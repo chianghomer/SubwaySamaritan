@@ -302,12 +302,16 @@ public class SubwayMaker {
         else if(intent.equals("THANKS_INTENT")){
             String result="";
             double random=Math.random();
+            String followedText="";
+            if (!sub.isComplete()){
+                followedText=textFollower(sub.getFirstIncomplete());
+            }
             if(random<0.33){
-                result= "You're welcome."+textFollower(sub.getFirstIncomplete());
+                result= "You're welcome."+followedText;
             }else if(random<0.66){
-                result= "My pleasure! "+textFollower(sub.getFirstIncomplete());
+                result= "My pleasure! "+followedText;
             }else{
-                result= "No problem. "+textFollower(sub.getFirstIncomplete());
+                result= "No problem. "+followedText;
             }
             return result;
         }

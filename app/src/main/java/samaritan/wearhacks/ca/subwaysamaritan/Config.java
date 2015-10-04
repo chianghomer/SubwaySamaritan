@@ -23,6 +23,6 @@ public class Config {
     public static final Uri SERVER_URI = Uri.parse("nmsp://" + APP_ID + "@" + SERVER_HOST + ":" + SERVER_PORT);
 
     //Only needed if using NLU/Bolt
-    public static final String BOLT_MODEL_TAG = "V8_Project783_App362";
+    public static final String BOLT_MODEL_TAG = "V9_Project783_App362";
 }
 

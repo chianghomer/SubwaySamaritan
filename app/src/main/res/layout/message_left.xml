@@ -14,7 +14,7 @@
         android:id="@+id/message_left_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_triangle"
+        android:src="@drawable/ic_picture1"
         />
 
     <TextView
